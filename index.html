@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Sabanal Portfolio</title>
-  </head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <title>Sabanal Portfolio</title>
+</head>
 
 
-  <style>
-    * {
-      scroll-behavior: smooth;
-    }
-    #map {
-      height: 400px;
-    }
-  </style>
+<style>
+  * {
+    scroll-behavior: smooth;
+  }
 
-  </head>
+  #map {
+    height: 400px;
+  }
+</style>
 
-  <body class="bg-[#FFFFFF] font-[Oswald] mx-20 my-10">
+</head>
+
+<body class="bg-[#FFFFFF] font-[Oswald]">
 
   <script>
     // Wait for the DOM to load
@@ -64,127 +55,175 @@
     });
   </script>
 
-    <header class="flex justify-between items-center my-10">
-      <div>
-        <a href="/"
-          ><img src="ankei-logo.png" alt="LOGO" class="h-10 w-40"
-        /></a>
+  <header class="flex justify-between items-center my-10 mx-8 lg:mx-20">
+    <div>
+      <a href="/"><img src="ankei-logo.png" alt="LOGO" class="h-10 w-40" /></a>
+    </div>
+    <nav class="hidden lg:block">
+      <ul class="flex justify-end items-end text-[#000000] font-bold text-2xl gap-10">
+        <li class="hover:text-gray-500 hover:underline">
+          <a href="/">Home</a>
+        </li>
+        <li class="hover:text-gray-500 hover:underline">
+          <a href="#about-me">About Me</a>
+        </li>
+        <li class="hover:text-gray-500 hover:underline">
+          <a href="#experience">Experience</a>
+        </li>
+        <li class="hover:text-gray-500 hover:underline">
+          <a href="">Tech Stack</a>
+        </li>
+        <li class="hover:text-gray-500 hover:underline">
+          <a href="">Social</a>
+        </li>
+      </ul>
+    </nav>
+    <button id="open-menu-btn" class="block lg:hidden">
+      <img src="menu-burger-horizontal-svgrepo-com.svg" alt="Menu" class="h-10 w-10 lg:hidden" />
+    </button>
+  </header>
+  <!-- Popup -->
+  <nav id="menu-items" class="p-0 m-0 bg-gray-200 hidden z-10">
+    <ul class="flex flex-col justify-center items-center  text-[#000000] font-bold text-2xl gap-10">
+      <li class="w-full border-b-black border-1"><a href="">Home</a></li>
+      <li><a href="">About Me</a></li>
+      <li><a href="">Experience</a></li>
+      <li><a href="">Tech Stack</a></li>
+      <li><a href="">Social</a></li>
+      <button id="close-menu-btn" class="py-2 px-4 bg-black">
+        close
+      </button>
+    </ul>
+  </nav>
+
+  <main class="mt-20 lg:mt-40 mx-8 lg:mx-20">
+    <!-- Hero -->
+    <section class="flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-16 leading-tight">
+
+      <div class="w-fit">
+        <img src="Errol.png" alt="Errol Sabanal" class="h-64 w-64 md:h-100 md:w-100 border-4 border-black" />
       </div>
-      <nav>
-        <ul
-          class="flex justify-end items-end text-[#000000] font-bold text-2xl gap-10"
-        >
-          <li class="hover:text-gray-500 hover:underline">
-            <a href="/">Home</a>
-          </li>
-          <li class="hover:text-gray-500 hover:underline">
-            <a href="#about-me">About Me</a>
-          </li>
-          <li class="hover:text-gray-500 hover:underline">
-            <a href="#experience">Experience</a>
-          </li>
-          <li class="hover:text-gray-500 hover:underline">
-            <a href="">Tech Stack</a>
-          </li>
-          <li class="hover:text-gray-500 hover:underline">
-            <a href="">Social</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+      <div class="w-[100%] lg:w-[70%]">
+        <h1 class="text-4xl md:text-7xl lg:text-8xl text-900 font-[900] mb-4 lg:mb-10">
+          Hey there. <br />
+          I'm <span class="text-gray-400">Errol Sabanal</span>.
+        </h1>
+        <p class="text-xl lg:text-2xl text-gray-900">
+          A fresh graduate developer, I bring strong foundational skills, a
+          passion for building practical solutions, and a constant desire to
+          learn and grow.
+        </p>
+      </div>
 
-    <main class="mt-40">
+    </section>
 
-      <section class="flex justify-between items-center gap-20 leading-tight">
-        <div class="w-[60%]">
-          <h1 class="text-8xl text-900 font-[900] mb-10">
-            Hey there. <br />
-            I'm <span class="text-gray-400">Errol Sabanal</span>.
-          </h1>
-          <p class="text-2xl text-gray-900">
-            A fresh graduate developer, I bring strong foundational skills, a
-            passion for building practical solutions, and a constant desire to
-            learn and grow.
-          </p>
+    <!-- About Me -->
+    <section class="mt-20" id="about-me">
+      <div class="border-b-3">
+        <h1 class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5">
+          About Me
+        </h1>
+      </div>
+
+      <div class="flex justify-between items-center gap-20 mt-10 border-3">
+        <div class="w-[50%] px-20">
+          <p class="text-5xl font-[900] mb-5">Errol R. Sabanal</p>
+          <p class="text-xl"><span class="font-bold">Age:</span> 22 years old</p>
+          <p class="text-xl"><span class="font-bold">Address:</span> Mancarugo, Bislig City, Surigao del Sur, Ph</p>
+          <p class="text-xl"><span class="font-bold">College Attended:</span> North Eastern Mindanao State University
+            (NEMSU) - 2020-2025</p>
+          <p class="text-xl"><span class="font-bold">Course:</span> Bachelor of Science in Computer Science</p>
         </div>
-        <div class="w-fit">
-          <img
-            src="Errol.png"
-            alt="Errol Sabanal"
-            class="h-100 w-100 border-4 border-black"
-          />
-        </div>
-      </section>
+        <div class="w-[50%] border-l-3" id="map"></div>
+      </div>
+    </section>
 
-      <section class="mt-20" id="about-me">
-        <div class="border-b-3">
-          <h1
-            class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5"
-          >
-            About Me
-          </h1>
-        </div>
+    <!-- Experience -->
+    <section class="mt-20" id="experience">
+      <div class="border-b-3">
+        <h1 class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5">
+          Experience
+        </h1>
+      </div>
 
-        <div class="flex justify-between items-center gap-20 mt-10 border-3">
-          <div class="w-[50%] px-20">
-            <p class="text-5xl font-[900] mb-5">Errol R. Sabanal</p>
-            <p class="text-xl"><span class="font-bold">Age:</span> 22 years old</p>
-            <p class="text-xl"><span class="font-bold">Address:</span> Mancarugo, Bislig City, Surigao del Sur, Ph</p>
-            <p class="text-xl"><span class="font-bold">College Attended:</span> North Eastern Mindanao State University (NEMSU) - 2020-2025</p>
-            <p class="text-xl"><span class="font-bold">Course:</span> Bachelor of Science in Computer Science</p>
+      <div class="flex w-full flex-col items-start mt-10">
+        <div class="group flex gap-x-6">
+          <div class="relative">
+            <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span
+              class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-400 text-slate-800"></span>
           </div>
-          <div class="w-[50%] border-l-3" id="map"></div>
-        </div>
-      </section>
-
-      <section class="mt-20" id="experience">
-        <div class="border-b-3">
-          <h1
-            class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5"
-          >
-            Experience
-          </h1>
-        </div>
-
-        <div class="flex w-full flex-col items-start mt-10">
-          <div class="group flex gap-x-6">
-            <div class="relative">
-              <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-400 text-slate-800"></span>
-            </div>
-            <div class="-translate-y-1.5 pb-8 text-slate-600">
-              <p class="text-3xl font-bold text-slate-800 antialiased">PNP - Tandag Component City Police Station (Administration)</p>
-              <small class="mt-2 text-xl text-slate-600 antialiased">On-The-Job Trainee, July 1, 2024 - July 21, 2024</small>
-              <ul class="list-disc list-inside pt-3">
-                <li>Assisted the administrator with various MS Office tasks.</li>
-                <li>Troubleshoot PC issues, performing basic repairs and software updates.</li>
-                <li>Designed and created a website for PNP Tandag. Improved the accessibility to station resources and information.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="group flex gap-x-6">
-            <div class="relative">
-              <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-400 text-slate-800"></span>
-            </div>
-            <div class="-translate-y-1.5 text-slate-600">
-              <p class="text-3xl font-bold text-slate-800 antialiased">Devple IT Solutions (Company)</p>
-              <small class="mt-2 text-xl text-slate-600 antialiased">2024 - Current</small>
-              <ul class="list-disc list-inside pt-3">
-                <li>Junior Developer of the company</li>
-              </ul>
-            </div>
+          <div class="-translate-y-1.5 pb-8 text-slate-600">
+            <p class="text-3xl font-bold text-slate-800 antialiased">PNP - Tandag Component City Police Station
+              (Administration)</p>
+            <small class="mt-2 text-xl text-slate-600 antialiased">On-The-Job Trainee, July 1, 2024 - July 21,
+              2024</small>
+            <ul class="list-disc list-inside pt-3">
+              <li>Assisted the administrator with various MS Office tasks.</li>
+              <li>Troubleshoot PC issues, performing basic repairs and software updates.</li>
+              <li>Designed and created a website for PNP Tandag. Improved the accessibility to station resources and
+                information.</li>
+            </ul>
           </div>
         </div>
-      </section>
-
-      <section class="mt-20" id="tech-stack">
-        <div class="border-b-3">
-          <h1
-            class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5"
-          >
-            Tech Stack
-          </h1>
+        <div class="group flex gap-x-6">
+          <div class="relative">
+            <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span
+              class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-400 text-slate-800"></span>
+          </div>
+          <div class="-translate-y-1.5 text-slate-600">
+            <p class="text-3xl font-bold text-slate-800 antialiased">Devple IT Solutions (Company)</p>
+            <small class="mt-2 text-xl text-slate-600 antialiased">2024 - Current</small>
+            <ul class="list-disc list-inside pt-3">
+              <li>Junior Developer of the company</li>
+            </ul>
+          </div>
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="mt-20" id="tech-stack">
+      <div class="border-b-3">
+        <h1 class="font-bold text-xl border-t-3 border-l-3 border-r-3 border-black w-fit p-5">
+          Tech Stack
+        </h1>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>
+
+<script>
+  const menuBtn = document.getElementById("open-menu-btn");
+  const menuItems = document.getElementById("menu-items");
+  const closeBtn = document.createElement("close-menu-btn");
+
+  menuBtn.addEventListener("click", () => {
+    menuItems.classList.toggle("hidden");
+    console.log("clicked");
+  });
+  closeBtn.addEventListener("click", () => {
+    menuItems.classList.add("hidden");
+  });
+  // menuItems.appendChild(closeBtn);
+</script>
+<!-- 
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const popup = document.getElementById('popup');
+  const closeBtn = document.getElementById('close-popup');
+
+  menuBtn.addEventListener('click', () => {
+    popup.classList.remove('hidden');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('hidden');
+  });
+
+  // Optional: close popup when clicking outside the box
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) popup.classList.add('hidden');
+  });
+</script> -->
