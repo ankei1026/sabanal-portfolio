@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <button id="close-btn" class="hidden">
+        <img src="close-x-svgrepo-com.svg" alt="">
+    </button>
+
+    <button id="open-btn" class="block">
+        <img src="menu-burger-horizontal-svgrepo-com.svg" alt="">
+    </button>
+
+    <h1 id="my-name" class="text-8xl font-bold">
+        Sabanal Portfolio
+    </h1>
+    <h1 id="place" class="text-8xl font-bold hidden">
+        Bislig City, Philippines
+    </h1>
+</body>
+</html>
+
+<script>
+    const toggleOpen = document.getElementById("open-btn");
+    const toggleClose = document.getElementById("close-btn");
+    const myName = document.getElementById("my-name");
+    const place = document.getElementById("place");
+
+    toggleOpen.addEventListener("click", () => (
+        toggleOpen.classList.add("hidden"),
+        place.classList.remove("hidden"),
+        myName.classList.add("hidden"),
+        toggleClose.classList.remove("hidden"),
+        console.log("open")
+    ));
+
+    toggleClose.addEventListener("click", () => (
+        toggleClose.classList.add("hidden"),
+        toggleOpen.classList.remove("hidden"),
+        myName.classList.remove("hidden"),
+        place.classList.add("hidden"),
+        console.log("close")
+    ))
+</script>
