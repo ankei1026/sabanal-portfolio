@@ -1,755 +1,661 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Errol Sabanal | Swiss Timeline Portfolio</title>
+  <!-- Font Awesome 6 (minimal icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" type="text/css" href="snow.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
-  <title>Sabanal Portfolio</title>
+  <!-- Devicon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Google Fonts: Inter (Swiss precision) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- SWISS CORE: strict, minimal, functional ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #FFFFFF;
+      color: #111111;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      font-size: 3.8rem;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      border-bottom: 2px solid #111;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    @media (min-width: 768px) {
+      h1 { font-size: 5rem; }
+      h2 { font-size: 2rem; }
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+      border-bottom: 1px solid #EAEAEA;
+    }
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    /* Navbar — active highlight */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #E5E5E5;
+      z-index: 1000;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #111;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-link {
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #1A1A1A;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid transparent;
+      transition: 0.1s linear;
+    }
+    .nav-link.active {
+      border-bottom-color: #111111;
+    }
+    .nav-link:hover {
+      border-bottom-color: #999;
+    }
+
+    /* Hero: image left, content right */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-image {
+      width: 100%;
+      max-width: 380px;
+      border: 1px solid #E5E5E5;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #555;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .btn-primary, .btn-outline {
+      display: inline-block;
+      font-weight: 500;
+      font-size: 0.8rem;
+      padding: 0.7rem 1.8rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary {
+      background: #111;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover { background: #2C2C2C; }
+    .btn-outline {
+      background: transparent;
+      color: #111;
+      border: 1px solid #111;
+      margin-left: 1rem;
+    }
+    .btn-outline:hover { background: #111; color: white; }
+
+    /* TIMELINE (vertical, swiss style — strict lines) */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: #D1D1D1;
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+      padding-left: 1.8rem;
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -0.55rem;
+      top: 0.2rem;
+      width: 12px;
+      height: 12px;
+      background: #111;
+      border: 2px solid white;
+      outline: 1px solid #111;
+      border-radius: 50%;
+    }
+    .timeline-date {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #555;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-sub {
+      font-weight: 500;
+      color: #3a3a3a;
+      margin-bottom: 0.75rem;
+    }
+    .timeline-desc {
+      color: #4a4a4a;
+      font-size: 0.85rem;
+      list-style: none;
+    }
+    .timeline-desc li {
+      margin-bottom: 0.35rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* Project grid — larger images */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    @media (min-width: 768px) {
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .project-card {
+      border: 1px solid #E5E5E5;
+      background: white;
+      transition: 0.1s ease;
+    }
+    .project-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: #F5F5F5;
+      border-bottom: 1px solid #EFEFEF;
+      display: block;
+    }
+    .project-content {
+      padding: 1.5rem;
+    }
+    .tech-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      background: #F5F5F5;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid #E0E0E0;
+      letter-spacing: 0.02em;
+    }
+    /* Map */
+    .map-container {
+      height: 320px;
+      width: 100%;
+      border: 1px solid #E5E5E5;
+    }
+    /* Tech grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 1rem;
+    }
+    @media (min-width: 560px) { .tech-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 768px) { .tech-grid { grid-template-columns: repeat(4,1fr); } }
+    @media (min-width: 1024px) { .tech-grid { grid-template-columns: repeat(6,1fr); } }
+    .tech-item {
+      border: 1px solid #ECECEC;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      background: #fff;
+    }
+    .tech-icon { font-size: 2rem; }
+    /* Social grid with info */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 1rem;
+    }
+    @media (min-width: 640px) { .social-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (min-width: 1024px) { .social-grid { grid-template-columns: repeat(4,1fr); } }
+    .social-card {
+      border: 1px solid #E5E5E5;
+      padding: 1.2rem;
+      text-align: center;
+      text-decoration: none;
+      color: #111;
+      transition: 0.1s;
+    }
+    .social-card:hover {
+      background: #FCFCFC;
+      border-color: #111;
+    }
+    .social-handle {
+      font-size: 0.7rem;
+      color: #5a5a5a;
+      margin-top: 0.25rem;
+    }
+
+    .footer {
+      background: #111;
+      color: #ccc;
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    /* mobile menu */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 1200;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      padding: 5rem 2rem;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .close-drawer {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+    }
+    .mobile-nav-link {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.75rem 0;
+      text-decoration: none;
+      color: #111;
+      border-bottom: 1px solid #eee;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+      .hero-image { margin: 0 auto; }
+      .container { padding: 0 1.25rem; }
+    }
+    .text-muted { color: #5c5c5c; }
+    hr { margin: 1rem 0; border: 0; border-top: 1px solid #E5E5E5; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  </style>
 </head>
+<body>
 
-<style>
-  * {
-    scroll-behavior: smooth;
-  }
-
-  #map {
-    height: 400px;
-  }
-
-  #map .leaflet-pane {
-    z-index: 1 !important;
-  }
-
-  /* Black and White Theme */
-  body {
-    background-color: #FFFFFF;
-    color: #000000;
-  }
-
-  .border-black {
-    border-color: #000000 !important;
-  }
-
-  /* Tech Stack hover effects */
-  .tech-card {
-    transition: all 0.3s ease;
-    background-color: #FFFFFF;
-    border: 3px solid #000000;
-  }
-
-  .tech-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-    background-color: #000000;
-    color: #FFFFFF;
-  }
-
-  .tech-card:hover .tech-icon {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-    color: #FFFFFF !important;
-  }
-
-  .tech-card:hover i {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-    color: #FFFFFF !important;
-  }
-
-  .tech-card:hover span {
-    color: #FFFFFF !important;
-  }
-
-  /* Project card animations */
-  .project-card {
-    transition: all 0.3s ease;
-    background-color: #FFFFFF;
-    border: 3px solid #000000;
-  }
-
-  .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-  }
-
-  .project-tag {
-    background-color: #f3f4f6 !important;
-    color: #000000 !important;
-    border: 1px solid #000000;
-  }
-
-  /* Social icons animation */
-  .social-icon {
-    transition: all 0.3s ease;
-    background-color: #FFFFFF;
-    border: 3px solid #000000;
-    color: #000000;
-  }
-
-  .social-icon:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-    background-color: #000000;
-    color: #FFFFFF;
-  }
-
-  .github:hover {
-    color: #FFFFFF;
-  }
-
-  .social-icon:hover .social-icon-text,
-  .social-icon:hover .social-icon-desc {
-    color: #FFFFFF !important;
-  }
-
-  /* Footer */
-  footer {
-    background-color: #f9fafb;
-    color: #000000;
-  }
-
-  /* Map styling */
-  .leaflet-container {
-    background-color: #FFFFFF !important;
-  }
-
-  /* Remove colored icons - make them black */
-  .devicon-html5-plain,
-  .devicon-css3-plain,
-  .devicon-javascript-plain,
-  .devicon-php-plain,
-  .devicon-python-plain,
-  .devicon-laravel-plain,
-  .devicon-react-original,
-  .devicon-typescript-plain,
-  .devicon-flutter-plain,
-  .devicon-tailwindcss-plain,
-  .devicon-git-plain,
-  .devicon-github-original,
-  .devicon-vscode-plain {
-    color: #000000 !important;
-  }
-
-  /* Social icons black */
-  .fab,
-  .fas {
-    color: #000000;
-  }
-
-  /* Hover effects for social icons */
-  .social-icon:hover .fab,
-  .social-icon:hover .fas,
-  .social-icon:hover .devicon {
-    color: #FFFFFF !important;
-  }
-
-  .social-icon:hover .devicon-github-original {
-    color: #ffffff !important;
-  }
-</style>
-
-<body class="font-[Oswald]">
-  <div class="snow"></div>
-  <script>
-    // Wait for the DOM to load
-    document.addEventListener("DOMContentLoaded", function () {
-      // Initialize the map
-      var map = L.map("map").setView([8.1918, 126.3323], 13); // Bislig City coords
-
-      // Add OpenStreetMap tiles
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      }).addTo(map);
-
-      // Optional: Add a marker
-      L.marker([8.1918, 126.3323])
-        .addTo(map)
-        .bindPopup("I live here! Bislig City, Surigao del Sur.")
-        .openPopup();
-    });
-  </script>
-
-  <header class="flex justify-between items-center my-6 px-8 md:mx-10 lg:mx-12 sticky top-0 py-4 bg-white z-[9999]">
-    <div>
-      <a href="https://ankei1026.github.io/sabanal-portfolio/"><img src="ankei-logo.png" alt="LOGO"
-          class="h-8 w-34 lg:h-10 lg:w-40" /></a>
+  <div class="navbar z-100">
+    <div class="nav-container">
+      <a href="#" class="logo">ERR<span style="font-weight:400;">OL</span> SABANAL</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link" data-nav="home">HOME</a>
+        <a href="#about" class="nav-link" data-nav="about">ABOUT</a>
+        <a href="#experience" class="nav-link" data-nav="experience">EXPERIENCE</a>
+        <a href="#projects" class="nav-link" data-nav="projects">PROJECTS</a>
+        <a href="#toolkit" class="nav-link" data-nav="toolkit">TOOLKIT</a>
+        <a href="#connect" class="nav-link" data-nav="connect">CONNECT</a>
+      </div>
+      <button id="menuToggleBtn" class="menu-toggle" aria-label="menu">☰</button>
     </div>
-    <nav class="hidden lg:block">
-      <ul class="flex justify-end items-end font-bold text-xl md:text-md lg:text-2xl gap-2 md:gap-4 lg:gap-6">
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="https://ankei1026.github.io/sabanal-portfolio/">Home</a>
-        </li>
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="#about-me">About Me</a>
-        </li>
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="#experience">Experience</a>
-        </li>
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="#project">Projects</a>
-        </li>
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="#tech-stack">Tech Stack</a>
-        </li>
-        <li class="hover:text-gray-700 hover:underline">
-          <a href="#social">Social</a>
-        </li>
-      </ul>
-    </nav>
-    <button id="open-menu-btn" class="block lg:hidden">
-      <img src="menu-burger-horizontal-svgrepo-com.svg" alt="Menu" class="h-10 w-10 lg:hidden" />
-    </button>
-    <button id="close-menu-btn" class="hidden lg:hidden">
-      <img src="close-x-svgrepo-com.svg" alt="Menu" class="h-10 w-10 lg:hidden" />
-    </button>
-  </header>
+  </div>
 
-  <!-- Popup -->
-  <nav id="menu-items" class="fixed bg-white hidden z-[9999] border-2 border-black rounded-xl top-24 left-8 right-8">
-    <ul class="flex flex-col justify-center items-center font-bold text-2xl gap-6 py-6">
-      <li class=""><a href="https://ankei1026.github.io/sabanal-portfolio/">Home</a></li>
-      <li class=""><a href="#about-me">About Me</a></li>
-      <li class=""><a href="#experience">Experience</a></li>
-      <li class=""><a href="#project">Projects</a></li>
-      <li class=""><a href="#tech-stack">Tech Stack</a></li>
-      <li class=""><a href="#social">Social</a></li>
-    </ul>
-  </nav>
+  <div id="mobileDrawer" class="mobile-drawer z-100">
+    <button id="closeDrawerBtn" class="close-drawer">✕</button>
+    <div>
+      <a href="#home" class="mobile-nav-link">HOME</a>
+      <a href="#about" class="mobile-nav-link">ABOUT</a>
+      <a href="#experience" class="mobile-nav-link">EXPERIENCE</a>
+      <a href="#projects" class="mobile-nav-link">PROJECTS</a>
+      <a href="#toolkit" class="mobile-nav-link">TOOLKIT</a>
+      <a href="#connect" class="mobile-nav-link">CONNECT</a>
+    </div>
+  </div>
 
-  <main class="mt-20 lg:mt-40 mx-8 lg:mx-20">
-    <!-- Hero -->
-    <section class="flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-16 leading-tight">
-      <div class="w-fit">
-        <img src="Errol.png" alt="Errol Sabanal" class="h-64 w-64 md:h-100 md:w-100 border-4 border-black" />
-      </div>
-      <div class="w-[100%] lg:w-[70%]">
-        <h1 class="text-center lg:text-start text-4xl md:text-7xl lg:text-8xl font-[900] mb-4 lg:mb-10">
-          Hey there. <br />
-          I'm <span class="">Errol Sabanal</span>.
-        </h1>
-        <p class="text-center lg:text-start text-xl md:text-2xl lg:text-2xl text-gray-800">
-          A fresh graduate developer, I bring strong foundational skills, a
-          passion for building practical solutions, and a constant desire to
-          learn and grow.
-        </p>
-      </div>
-    </section>
-
-    <!-- About Me -->
-    <section class="mt-20" id="about-me">
-      <div class="border-b-2 border-black">
-        <h1 class="font-bold text-xl border-t-2 border-l-2 border-r-2 border-black w-fit p-5">
-          About Me
-        </h1>
-      </div>
-      <div class="flex justify-between flex-col lg:flex-row items-center gap-20 mt-10 border-2 border-black z-10">
-        <div class="w-[100%] lg:w-[50%] h-full px-10 lg:px-20 flex flex-col items-start justify-center mt-16 lg:mt-0">
-          <p class="text-lg lg:text-xl"><span class="font-bold">Age:</span> 22 years old</p>
-          <p class="text-lg lg:text-xl"><span class="font-bold">Address:</span> Mancarugo, Bislig City, Surigao del
-            Sur,
-            Ph</p>
-          <p class="text-lg lg:text-xl"><span class="font-bold">College Attended:</span> North Eastern Mindanao State
-            University
-            (NEMSU) - 2020-2025</p>
-          <p class="text-lg lg:text-xl"><span class="font-bold">Course:</span> Bachelor of Science in Computer Science
-          </p>
-        </div>
-        <div class="w-[100%] lg:w-[50%] border-t-2 lg:border-t-0 lg:border-l-2 border-black" id="map"></div>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="mt-20" id="experience">
-      <div class="border-b-2 border-black">
-        <h1 class="font-bold text-xl border-t-2 border-l-2 border-r-2 border-black w-fit p-5">
-          Experience
-        </h1>
-      </div>
-      <div class="flex w-full flex-col items-start mt-10">
-        <div class="group flex gap-x-6">
-          <div class="relative">
-            <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span
-              class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-800 text-slate-800"></span>
+  <main>
+    <!-- Hero Section: image on left, text right -->
+    <section id="home" class="section">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <img src="Errol.png" alt="Errol Sabanal" class="hero-image" onerror="this.src='https://placehold.co/400x450?text=Errol+Sabanal'">
           </div>
-          <div class="-translate-y-1.5 pb-8 text-gray-700">
-            <p class="text-3xl font-bold text-gray-900 antialiased">PNP - Tandag Component City Police Station
-              (Administration)</p>
-            <small class="mt-2 text-xl text-gray-600 antialiased">On-The-Job Trainee, July 1, 2024 - July 21,
-              2024</small>
-            <ul class="list-disc list-inside pt-3 text-gray-700">
-              <li>Assisted the administrator with various MS Office tasks.</li>
-              <li>Troubleshoot PC issues, performing basic repairs and software updates.</li>
-              <li>Designed and created a website for PNP Tandag. Improved the accessibility to station resources and
-                information.</li>
+          <div>
+            <span class="hero-badge">BS COMPUTER SCIENCE</span>
+            <h1>Errol Sabanal<br><span style="border-bottom: 3px solid #111;">systems & clarity</span></h1>
+            <p class="text-muted" style="margin-bottom: 1.8rem; max-width: 90%;">Developer focused on structured logic, functional design, and pragmatic solutions.</p>
+            <div>
+              <a href="#projects" class="btn-primary">View projects →</a>
+              <a href="#contact" class="btn-outline">Contact</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About + Map -->
+    <section id="about" class="section z-10">
+      <div class="container">
+        <h2>Profile</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div style="border: 1px solid #E5E5E5; padding: 1.8rem;">
+            <p><strong>Age</strong><br>22</p>
+            <hr>
+            <p><strong>Location</strong><br>Mancarugo, Bislig City, Surigao del Sur</p>
+            <hr>
+            <p><strong>Education</strong><br>North Eastern Mindanao State University — BS Computer Science (2020–2025)</p>
+          </div>
+          <div style="border: 1px solid #E5E5E5; overflow: hidden;">
+            <div id="map" class="map-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE BASED EXPERIENCE (vertical, swiss) -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <!-- 2025 Freelance -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2025 — present</div>
+            <div class="timeline-title">Freelance Developer</div>
+            <div class="timeline-sub">Independent / Remote</div>
+            <ul class="timeline-desc">
+              <li>→ Full-stack web & mobile applications for local startups.</li>
+              <li>→ Tech: Laravel, React, Flutter, Tailwind, Python.</li>
             </ul>
           </div>
-        </div>
-        <div class="group flex gap-x-6">
-          <div class="relative">
-            <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span
-              class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-800 text-slate-800"></span>
-          </div>
-          <div class="-translate-y-1.5 text-gray-700">
-            <p class="text-3xl font-bold text-gray-900 antialiased">Devple IT Solutions (Company)</p>
-            <small class="mt-2 text-xl text-gray-600 antialiased">2024 - 2025 | Project-Based</small>
-            <ul class="list-disc list-inside pt-3 text-gray-700 mb-6">
-              <li>Junior Developer of the company</li>
+          <!-- 2024-2025 Devple -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 — 2025</div>
+            <div class="timeline-title">Junior Developer</div>
+            <div class="timeline-sub">Devple IT Solutions</div>
+            <ul class="timeline-desc">
+              <li>→ Built client-facing apps with Laravel, Inertia, React.</li>
+              <li>→ API integrations, database design & performance tuning.</li>
             </ul>
           </div>
-        </div>
-                <div class="group flex gap-x-6">
-          <div class="relative">
-            <div class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gray-400"></div><span
-              class="relative z-10 grid h-3 w-3 place-items-center rounded-full bg-gray-800 text-slate-800"></span>
-          </div>
-          <div class="-translate-y-1.5 text-gray-700">
-            <p class="text-3xl font-bold text-gray-900 antialiased">Freelancer</p>
-            <small class="mt-2 text-xl text-gray-600 antialiased">2025 - Present</small>
-            <ul class="list-disc list-inside pt-3 text-gray-700">
-              <li>Web development projects for various clients</li>
+          <!-- 2024 OJT PNP -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">July 2024</div>
+            <div class="timeline-title">On-The-Job Trainee</div>
+            <div class="timeline-sub">PNP Tandag Component City Police Station</div>
+            <ul class="timeline-desc">
+              <li>→ IT administration, hardware/software troubleshooting.</li>
+              <li>→ Developed an internal website to streamline resource access.</li>
             </ul>
           </div>
+          
         </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="mt-20" id="project">
-      <div class="border-b-2 border-black">
-        <h1 class="font-bold text-xl border-t-2 border-l-2 border-r-2 border-black w-fit p-5">
-          Projects
-        </h1>
-      </div>
-
-      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- SWMIS -->
-        <div class="project-card p-0 overflow-hidden">
-          <div class="h-auto bg-gray-100 overflow-hidden border-b-2 border-black">
-            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-              <img src="SWMIS.png" alt="">
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="mb-4">
-              <h3 class="text-2xl font-bold mb-2">SWMIS</h3>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Laravel</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Inertia</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">React</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">TypeScript</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Tailwind CSS</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Leaflet</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">PhilSMS</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">MySQL</span>
+    <!-- PROJECTS (larger images) -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <!-- SWMIS -->
+          <div class="project-card">
+            <img src="SWMIS.png" alt="SWMIS" class="project-img" onerror="this.src='https://placehold.co/600x280?text=SWMIS'">
+            <div class="project-content">
+              <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">SWMIS</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <span class="tech-tag">Laravel</span><span class="tech-tag">Inertia</span><span class="tech-tag">React</span><span class="tech-tag">TS</span>
               </div>
-            </div>
-            <p class="text-gray-700 mb-6">
-              SWMIS(Solid Waste Management Information System) is a comprehensive platform designed to streamline
-              solid
-              waste management using digital tools.
-              It integrates role-based dashboards, map-based route viewing, resident communication, and administrative
-              controls to optimize waste collection operations.
-            </p>
-            <div class="flex justify-between items-center">
-              <a href="http://swmis.online/" target="_blank"
-                class="font-semibold hover:text-gray-700 flex items-center gap-2">
-                <i class="fas fa-external-link-alt"></i>
-                View Project
-              </a>
-              <a href="https://github.com/ankei1026/swmis.git" target="_blank" class="hover:text-gray-700">
-                <i class="devicon-github-original text-2xl"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCHEDAI -->
-        <div class="project-card p-0 overflow-hidden">
-          <div class="h-auto bg-gray-100 overflow-hidden border-b-2 border-black">
-            <div class="w-auto h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-              <div class="text-center">
-                <img src="SCHEDAI.png" alt="">
+              <p class="text-muted" style="margin-bottom: 1.2rem;">Solid Waste Management Information System — route optimization, dashboard analytics, real‑time tracking.</p>
+              <div class="flex-between">
+                <a href="http://swmis.online/" target="_blank" class="btn-primary">LIVE →</a>
+                <a href="https://github.com/ankei1026/swmis.git" target="_blank" style="color:#111;"><i class="fab fa-github"></i> repo</a>
               </div>
             </div>
           </div>
-          <div class="p-6">
-            <div class="mb-4">
-              <h3 class="text-2xl font-bold mb-2">SchedAI</h3>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Laravel</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Inertia</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">React</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">TypeScript</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Python</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">MySQL</span>
+          <!-- SCHEDAI -->
+          <div class="project-card">
+            <img src="SCHEDAI.png" alt="SchedAI" class="project-img" onerror="this.src='https://placehold.co/600x280?text=SchedAI'">
+            <div class="project-content">
+              <h3 style="font-size: 1.5rem;">SchedAI</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <span class="tech-tag">Laravel</span><span class="tech-tag">React</span><span class="tech-tag">Python</span>
               </div>
-            </div>
-            <p class="text-gray-700 mb-6">
-              SchedAI is a smart class scheduling and management web application built with Laravel, Inertia, and
-              React.
-              Designed to help schools automate schedule creation, bookings, and role-based management.
-            </p>
-            <div class="flex justify-between items-center">
-              <a href="http://schedai.site/" target="_blank"
-                class="font-semibold hover:text-gray-700 flex items-center gap-2">
-                <i class="fas fa-external-link-alt"></i>
-                View Project
-              </a>
-              <a href="https://github.com/urutakun/sched_AI.git" target="_blank" class="hover:text-gray-700">
-                <i class="devicon-github-original text-2xl"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      <!-- Consumo -->
-      <div class="project-card p-0 overflow-hidden">
-          <div class="h-auto bg-gray-100 overflow-hidden border-b-2 border-black">
-            <div class="w-auto h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-              <div class="text-center">
-                <img src="Consumo.png" alt="Consumo">
+              <p class="text-muted" style="margin-bottom: 1.2rem;">AI-assisted class scheduling: automatic timetable generation, booking system & role management.</p>
+              <div class="flex-between">
+                <a href="http://schedai.site/" target="_blank" class="btn-primary">LIVE →</a>
+                <a href="https://github.com/urutakun/sched_AI.git" target="_blank" style="color:#111;"><i class="fab fa-github"></i> repo</a>
               </div>
             </div>
           </div>
-          <div class="p-6">
-            <div class="mb-4">
-              <h3 class="text-2xl font-bold mb-2">Consumo Web App + Mobile App</h3>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Flutter</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Laravel</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Inertia</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">React</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">TypeScript</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Python</span>
+          <!-- Consumo -->
+          <div class="project-card">
+            <img src="Consumo.png" alt="Consumo" class="project-img" onerror="this.src='https://placehold.co/600x280?text=Consumo'">
+            <div class="project-content">
+              <h3 style="font-size: 1.5rem;">Consumo App</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <span class="tech-tag">Flutter</span><span class="tech-tag">Laravel</span><span class="tech-tag">React</span><span class="tech-tag">Python</span>
               </div>
-            </div>
-            <p class="text-gray-700 mb-6">
-              Consumo is a mobile application for tracking and managing consumption data, built with Flutter.
-              It allows users to log monthly consumption, report leaking with multimodal ai analysis.
-              And provides a web dashboard for administrators to monitor and manage consumers effectively.
-            </p>
-            <div class="flex justify-between items-center">
-              <a href="http://consumo-cagwait.online/" target="_blank"
-                class="font-semibold hover:text-gray-700 flex items-center gap-2">
-                <i class="fas fa-external-link-alt"></i>
-                View Project
-              </a>
-              <a href="https://github.com/ankei1026/consumo" target="_blank" class="hover:text-gray-700">
-                <i class="devicon-github-original text-2xl"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Wander Surigao del Sur -->
-      <div class="project-card p-0 overflow-hidden">
-          <div class="h-auto bg-gray-100 overflow-hidden border-b-2 border-black">
-            <div class="w-auto h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-              <div class="text-center">
-                <img src="WANDERSDS.png" alt="Wander Surigao del Sur">
+              <p class="text-muted" style="margin-bottom: 1.2rem;">Consumption tracking (mobile + web) with AI analytics, admin dashboards.</p>
+              <div class="flex-between">
+                <a href="http://consumo-cagwait.online/" target="_blank" class="btn-primary">LIVE →</a>
+                <a href="https://github.com/ankei1026/consumo" target="_blank"><i class="fab fa-github"></i> repo</a>
               </div>
             </div>
           </div>
-          <div class="p-6">
-            <div class="mb-4">
-              <h3 class="text-2xl font-bold mb-2">Wander Surigao del Sur (My Thesis)</h3>
-              <div class="flex flex-wrap gap-2 mb-4">
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Laravel</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Inertia</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">React</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">TypeScript</span>
-                <span class="project-tag text-sm font-medium px-3 py-1 rounded">Python</span>
+          <!-- Wander SDS -->
+          <div class="project-card">
+            <img src="WANDERSDS.png" alt="Wander SDS" class="project-img" onerror="this.src='https://placehold.co/600x280?text=Wander+SDS'">
+            <div class="project-content">
+              <h3 style="font-size: 1.5rem;">Wander Surigao del Sur</h3>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <span class="tech-tag">Laravel</span><span class="tech-tag">Inertia</span><span class="tech-tag">React</span>
+              </div>
+              <p class="text-muted" style="margin-bottom: 1.2rem;">Tourism management platform: interactive map, attraction directory, admin panel.</p>
+              <div class="flex-between">
+                <a href="http://wander-sds.online/" target="_blank" class="btn-primary">LIVE →</a>
+                <a href="https://github.com/ankei1026/wander" target="_blank"><i class="fab fa-github"></i> repo</a>
               </div>
             </div>
-            <p class="text-gray-700 mb-6">
-              Wander Surigao del Sur is a web application for managing and promoting tourism in Surigao del Sur.
-              It allows users to browse attractions with maps, view details, and let the tourist know the local culture and attractions.
-              And provides a admin panel for managing content and user accounts.
-              And provides a web dashboard for administrators to monitor and manage consumers effectively.
-            </p>
-            <div class="flex justify-between items-center">
-              <a href="http://wander-sds.online/" target="_blank"
-                class="font-semibold hover:text-gray-700 flex items-center gap-2">
-                <i class="fas fa-external-link-alt"></i>
-                View Project
-              </a>
-              <a href="https://github.com/ankei1026/wander" target="_blank" class="hover:text-gray-700">
-                <i class="devicon-github-original text-2xl"></i>
-              </a>
-            </div>
           </div>
-        </div>
-      </div>
-
-      
-      </div>
-      </div>
-    
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="mt-20" id="tech-stack">
-      <div class="border-b-2 border-black">
-        <h1 class="font-bold text-xl border-t-2 border-l-2 border-r-2 border-black w-fit p-5">
-          Tech Stack
-        </h1>
-      </div>
-
-      <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-        <!-- HTML -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-html5-plain"></i>
-          </div>
-          <span class="font-bold text-lg">HTML</span>
-        </div>
-
-        <!-- CSS -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-css3-plain"></i>
-          </div>
-          <span class="font-bold text-lg">CSS</span>
-        </div>
-
-        <!-- JavaScript -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-javascript-plain"></i>
-          </div>
-          <span class="font-bold text-lg">JavaScript</span>
-        </div>
-
-        <!-- PHP -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-php-plain"></i>
-          </div>
-          <span class="font-bold text-lg">PHP</span>
-        </div>
-
-        <!-- Python -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-python-plain"></i>
-          </div>
-          <span class="font-bold text-lg">Python</span>
-        </div>
-
-        <!-- Laravel -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-laravel-plain"></i>
-          </div>
-          <span class="font-bold text-lg">Laravel</span>
-        </div>
-
-        <!-- Inertia with Custom SVG -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </div>
-          <span class="font-bold text-lg">Inertia</span>
-        </div>
-
-        <!-- React -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-react-original"></i>
-          </div>
-          <span class="font-bold text-lg">React</span>
-        </div>
-
-        <!-- TypeScript -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-typescript-plain"></i>
-          </div>
-          <span class="font-bold text-lg">TypeScript</span>
-        </div>
-
-        <!-- Flutter -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-flutter-plain"></i>
-          </div>
-          <span class="font-bold text-lg">Flutter</span>
-        </div>
-
-        <!-- TailwindCSS -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-tailwindcss-plain"></i>
-          </div>
-          <span class="font-bold text-lg">TailwindCSS</span>
-        </div>
-
-        <!-- Git -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-git-plain"></i>
-          </div>
-          <span class="font-bold text-lg">Git</span>
-        </div>
-
-        <!-- GitHub -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-github-original"></i>
-          </div>
-          <span class="font-bold text-lg">GitHub</span>
-        </div>
-
-        <!-- VS Code -->
-        <div class="tech-card p-6 flex flex-col items-center justify-center">
-          <div class="text-4xl mb-3 tech-icon">
-            <i class="devicon-vscode-plain"></i>
-          </div>
-          <span class="font-bold text-lg">VS Code</span>
         </div>
       </div>
     </section>
 
-    <!-- Social -->
-    <section class="mt-20 mb-20" id="social">
-      <div class="border-b-2 border-black">
-        <h1 class="font-bold text-xl border-t-2 border-l-2 border-r-2 border-black w-fit p-5">
-          Social
-        </h1>
+    <!-- TECH STACK -->
+    <section id="toolkit" class="section">
+      <div class="container">
+        <h2>Toolkit</h2>
+        <div class="tech-grid">
+          <div class="tech-item"><i class="devicon-html5-plain tech-icon"></i><p class="text-sm mt-1">HTML5</p></div>
+          <div class="tech-item"><i class="devicon-css3-plain tech-icon"></i><p class="text-sm">CSS3</p></div>
+          <div class="tech-item"><i class="devicon-javascript-plain tech-icon"></i><p class="text-sm">JavaScript</p></div>
+          <div class="tech-item"><i class="devicon-php-plain tech-icon"></i><p class="text-sm">PHP</p></div>
+          <div class="tech-item"><i class="devicon-python-plain tech-icon"></i><p class="text-sm">Python</p></div>
+          <div class="tech-item"><i class="devicon-laravel-plain tech-icon"></i><p class="text-sm">Laravel</p></div>
+          <div class="tech-item"><i class="devicon-react-original tech-icon"></i><p class="text-sm">React</p></div>
+          <div class="tech-item"><i class="devicon-typescript-plain tech-icon"></i><p class="text-sm">TypeScript</p></div>
+          <div class="tech-item"><i class="devicon-flutter-plain tech-icon"></i><p class="text-sm">Flutter</p></div>
+          <div class="tech-item"><i class="devicon-tailwindcss-plain tech-icon"></i><p class="text-sm">Tailwind</p></div>
+          <div class="tech-item"><i class="devicon-git-plain tech-icon"></i><p class="text-sm">Git</p></div>
+          <div class="tech-item"><i class="devicon-github-original tech-icon"></i><p class="text-sm">GitHub</p></div>
+        </div>
       </div>
+    </section>
 
-      <div class="mt-10">
-        <p class="text-xl text-gray-700 mb-10 text-center">
-          Feel free to reach out to me through any of these platforms. I'm always open to discussing new
-          opportunities,
-          projects, or just having a chat about technology!
-        </p>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <!-- GitHub -->
-          <a href="https://github.com/ankei1026" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="devicon-github-original"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">GitHub</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">@ankei1026</p>
-          </a>
-
-          <!-- LinkedIn -->
-          <a href="www.linkedin.com/in/errol-sabanal-1a8bba372" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fab fa-linkedin"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">LinkedIn</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">Errol Sabanal</p>
-          </a>
-
-          <!-- Email -->
-          <a href="mailto:sabanal.errol12@gmail.com" class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">Email</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">sabanal.errol12@gmail.com</p>
-          </a>
-
-          <!-- Facebook -->
-          <a href="https://web.facebook.com/profile.php?id=61578413432734" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fab fa-facebook"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">Facebook</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">Errol Sabanal</p>
-          </a>
-
-          <!-- Onlinejobs.ph -->
-          <a href="https://www.onlinejobs.ph/jobseekers/info/4368144" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fas fa-briefcase"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">OnlineJobs.ph</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">Errol Rubic Sabanal</p>
-          </a>
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/xiccerrol/" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fab fa-instagram"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">Instagram</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">@xiccerrol</p>
-          </a>
-
-          <!-- Portfolio -->
-          <a href="https://ankei1026.github.io/sabanal-portfolio/" target="_blank"
-            class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fas fa-globe"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">Portfolio</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">Online Portfolio</p>
-          </a>
-
-          <!-- Phone -->
-          <a href="tel:+639123456789" class="social-icon p-6 flex flex-col items-center justify-center">
-            <div class="text-5xl mb-4">
-              <i class="fas fa-phone"></i>
-            </div>
-            <span class="font-bold text-lg social-icon-text">Phone</span>
-            <p class="text-gray-600 text-sm mt-2 text-center social-icon-desc">+63 9062377530</p>
-          </a>
+    <!-- SOCIAL with detailed information (handles and contact) -->
+    <section id="connect" class="section">
+      <div class="container">
+        <h2>Connect</h2>
+        <div class="social-grid">
+          <a href="https://github.com/ankei1026" target="_blank" class="social-card"><i class="devicon-github-original text-2xl"></i><p class="font-semibold mt-1">GitHub</p><span class="social-handle">@ankei1026</span><span class="text-xs">/repositories</span></a>
+          <a href="#" class="social-card"><i class="fab fa-linkedin text-2xl"></i><p class="font-semibold">LinkedIn</p><span class="social-handle">Errol Sabanal</span></a>
+          <a href="mailto:sabanal.errol12@gmail.com" class="social-card"><i class="fas fa-envelope text-2xl"></i><p class="font-semibold">Email</p><span class="social-handle">sabanal.errol12</span></a>
+          <a href="https://web.facebook.com/profile.php?id=61578413432734" target="_blank" class="social-card"><i class="fab fa-facebook text-2xl"></i><p class="font-semibold">Facebook</p><span class="social-handle">Errol Sabanal</span></a>
+          <a href="#" class="social-card"><i class="fas fa-briefcase text-2xl"></i><p class="font-semibold">OnlineJobs.ph</p><span class="social-handle">Errol Sabanal</span></a>
+          <a href="https://www.instagram.com/xiccerrol/" target="_blank" class="social-card"><i class="fab fa-instagram text-2xl"></i><p class="font-semibold">Instagram</p><span class="social-handle">@xiccerrol</span></a>
+          <a href="#" class="social-card"><i class="fas fa-globe text-2xl"></i><p class="font-semibold">Portfolio</p><span class="social-handle">errol.dev</span></a>
+          <a href="tel:+639062377530" class="social-card"><i class="fas fa-phone text-2xl"></i><p class="font-semibold">Phone</p><span class="social-handle">+63 906 237 7530</span></a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t-2 border-black py-8 text-center">
-    <p class="text-gray-800">© 2024 Errol Sabanal. All rights reserved.</p>
-    <p class="text-gray-600 mb-4">Built with passion and dedication</p>
-    <h1 class="text-gray-800">Sun Tzu</h1>
-    <p class="italic text-gray600">"In the midst of chaos, there is also opportunity."</p>
+  <footer class="footer">
+    <p>© 2024 Errol Sabanal</p>
+    <p class="text-sm" style="margin-top: 0.4rem; opacity:0.7;">In the midst of chaos, there is also opportunity. — Sun Tzu</p>
   </footer>
 
+  <script>
+    // Leaflet map
+    document.addEventListener("DOMContentLoaded", function() {
+      if (document.getElementById("map") && typeof L !== 'undefined') {
+        const map = L.map("map").setView([8.1918, 126.3323], 12);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+        }).addTo(map);
+        L.marker([8.1918, 126.3323]).addTo(map).bindPopup("📍 Bislig City, Surigao del Sur");
+      }
+    });
+
+    // Active nav highlight based on scroll
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function updateActiveNav() {
+      let current = "";
+      const scrollPos = window.scrollY + 150;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        const href = link.getAttribute("href")?.substring(1);
+        if (href === current) {
+          link.classList.add("active");
+        }
+      });
+    }
+    window.addEventListener("scroll", updateActiveNav);
+    window.addEventListener("load", updateActiveNav);
+
+    // Mobile drawer
+    const menuBtn = document.getElementById("menuToggleBtn");
+    const drawer = document.getElementById("mobileDrawer");
+    const closeBtn = document.getElementById("closeDrawerBtn");
+    if (menuBtn && drawer && closeBtn) {
+      menuBtn.addEventListener("click", () => {
+        drawer.classList.add("open");
+        document.body.style.overflow = "hidden";
+      });
+      closeBtn.addEventListener("click", () => {
+        drawer.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+      document.querySelectorAll("#mobileDrawer a").forEach(link => {
+        link.addEventListener("click", () => {
+          drawer.classList.remove("open");
+          document.body.style.overflow = "";
+        });
+      });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawer.classList.contains("open")) {
+          drawer.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+  </script>
 </body>
-
 </html>
-
-<script>
-  const menuBtn = document.getElementById("open-menu-btn");
-  const menuItems = document.getElementById("menu-items");
-  const closeBtn = document.getElementById("close-menu-btn");
-
-  menuBtn.addEventListener("click", () => {
-    menuItems.classList.remove("hidden"); // Show menu
-    menuBtn.classList.add("hidden");      // Hide hamburger button
-    closeBtn.classList.remove("hidden");  // Show close button
-  });
-
-  closeBtn.addEventListener("click", () => {
-    menuItems.classList.add("hidden");    // Hide menu
-    menuBtn.classList.remove("hidden");   // Show hamburger button
-    closeBtn.classList.add("hidden");     // Hide close button
-  });
-</script>
